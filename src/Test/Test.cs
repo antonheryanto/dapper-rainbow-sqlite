@@ -25,7 +25,7 @@ namespace Test
         public void InsertTest()
         {            
             var id = db.Posts.Insert(new { name = "x", description="x", changed = DateTime.Now, publish = true });
-            var x = db.Posts.Get((int)id);
+            var x = db.Posts.Get(id);
             Assert.AreEqual(id, 2);
         }
 
