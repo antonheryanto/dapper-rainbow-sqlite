@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<package >
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Dapper.Rainbow.SQLite</id>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <title>Dapper.Rainbow.SQLite</title>
     <authors>Sam Saffron, Anton Heryanto</authors>
     <owners>Sam Saffron, Anton Heryanto</owners>
@@ -18,14 +18,17 @@
         The implementation was extracted from http://data.stackexchange.com source at: http://code.google.com/p/stack-exchange-data-explorer/ .
         Data explorer uses "Rainbow" exclusively for all database access.
     </summary>
-    <releaseNotes>Sync with latest dapper.rainbow which include IgnorePropertyAttribute</releaseNotes>
+    <releaseNotes>
+    * 0.2.1 - Upgrade to dapper 1.40
+    * 0.2.0 - Sync with latest dapper.rainbow which include IgnorePropertyAttribute
+    </releaseNotes>
     <copyright>Copyright Sam Saffron, Anton Heryanto 2015</copyright>
     <tags>orm dapper micro-orm sqlite</tags>
     <dependencies>
-      <dependency id="Dapper" version="1.38" />      
+      <dependency id="Dapper" version="1.40" />      
     </dependencies>
   </metadata>
   <files>
-    <file src="..\src\Dapper.Rainbow.SQLite\bin\Release\Dapper.Rainbow.SQLite.dll" target="lib\net40" />
+      <file src="bin/Dapper.Rainbow.SQLite.dll" target="lib/net45" />
   </files>
 </package>
