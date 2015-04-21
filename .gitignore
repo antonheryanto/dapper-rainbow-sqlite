@@ -1,0 +1,6 @@
+*.userprefs
+.hgignore
+.hg
+obj
+bin
+packages

@@ -1,8 +1,0 @@
-syntax: glob
-*.suo
-obj
-bin
-packages
-*.nupkg
-*.userprefs
-.DS_Store
