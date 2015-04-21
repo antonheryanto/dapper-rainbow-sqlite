@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using PetaTest;
 using Dapper;
-using System.Data.SQLite;
+#if __MonoCS__
+using Mono.Data.Sqlite;
+#else
+using System.Data.SQLite
+#endif
 
 namespace Test
 {
@@ -26,13 +30,13 @@ namespace Test
         {            
             var id = db.Posts.Insert(new { name = "x", description="x", changed = DateTime.Now, publish = true });
             var x = db.Posts.Get(id);
-            Assert.AreEqual(id, 2);
+			Assert.AreEqual(x.Name, "x");
         }
 
         [Test]
         public void UpdateTest()
         {
-            var x = db.Posts.Update(1, new { name = "update" });
+            db.Posts.Update(1, new { name = "update" });
             var y = db.Posts.Get(1);
             Assert.AreEqual(y.Name, "update");
         }
@@ -57,7 +61,7 @@ namespace Test
         [Test]
         public void InsertOrUpdateTest()
         {            
-            var f = db.Posts.InsertOrUpdate(new { id = 1, name = "insertOrUpdate", });
+            db.Posts.InsertOrUpdate(new { id = 1, name = "insertOrUpdate", });
             var c = db.Posts.Get(1);
 
             Assert.AreEqual(c.Name, "insertOrUpdate");
@@ -66,11 +70,17 @@ namespace Test
         [TestFixtureSetUp]
         public void Setup()
         {
-            var cn = new SQLiteConnection("Data Source=:memory:;Version=3;");//New=true
+			var cn = new
+#if __MonoCS__
+				SqliteConnection
+#else
+				SQLiteConnection
+#endif
+				("Data Source=:memory:;Version=3;");//New=true
             cn.Open();
             db = db ?? Db.Init(cn, 30);
 
-            var r = db.Execute(@"CREATE TABLE Posts (
+            db.Execute(@"CREATE TABLE Posts (
                 id INTEGER PRIMARY KEY ASC, 
                 name VARCHAR(16), 
                 description VARCHAR(128),
